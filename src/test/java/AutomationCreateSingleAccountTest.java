@@ -13,7 +13,7 @@ public class AutomationCreateSingleAccountTest {
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         js = (JavascriptExecutor) driver;
-        driver.get("https://tinyurl.com/5yamxppx");
+        driver.get("http://automationpractice.com/index.php");
         driver.manage().window().setSize(new Dimension(1900, 1017));
         try {
             driver.findElement(By.linkText("Sign out")).click();
@@ -23,14 +23,14 @@ public class AutomationCreateSingleAccountTest {
         }
         driver.findElement(By.linkText("Sign in")).click();
         driver.findElement(By.id("email_create")).click();
-        driver.findElement(By.id("email_create")).sendKeys("88@macr2.com");
+        driver.findElement(By.id("email_create")).sendKeys("13@macr2.com");
         driver.findElement(By.cssSelector("#SubmitCreate > span")).click();
         try {
             driver.findElement(By.id("customer_firstname")).click();
         }
         catch (NoSuchElementException ex) {
             driver.findElement(By.id("email_create")).clear();
-            driver.findElement(By.id("email_create")).sendKeys("46648@macr2.com");
+            driver.findElement(By.id("email_create")).sendKeys("33@macr2.com");
             driver.findElement(By.cssSelector("#SubmitCreate > span")).click();
             WebDriverWait wait = new WebDriverWait(driver, 3000);
             wait.until(ExpectedConditions.elementToBeClickable(By.id("customer_firstname")));
@@ -68,5 +68,7 @@ public class AutomationCreateSingleAccountTest {
         driver.findElement(By.cssSelector(".form-group:nth-child(13)")).click();
         driver.findElement(By.id("alias")).click();
         driver.findElement(By.cssSelector("#submitAccount > span")).click();
+        driver.findElement(By.linkText("Sign out")).click();
+        driver.close();
     }
 }
