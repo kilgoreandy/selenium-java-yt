@@ -2,9 +2,10 @@ import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class AutomationCreateAccountTest {
+public class AutomationCreateSingleAccountTest {
 
     @Test
     public void firstTest() {
@@ -29,32 +30,23 @@ public class AutomationCreateAccountTest {
         }
         catch (NoSuchElementException ex) {
             driver.findElement(By.id("email_create")).clear();
-            driver.findElement(By.id("email_create")).sendKeys("468455@macr2.com");
+            driver.findElement(By.id("email_create")).sendKeys("46648@macr2.com");
             driver.findElement(By.cssSelector("#SubmitCreate > span")).click();
             WebDriverWait wait = new WebDriverWait(driver, 3000);
             wait.until(ExpectedConditions.elementToBeClickable(By.id("customer_firstname")));
             driver.findElement(By.id("customer_firstname")).click();
         }
         driver.findElement(By.id("customer_firstname")).sendKeys("Bob");
-        //driver.findElement(By.xpath("//input[@id='id_gender1']")).click();
+        driver.findElement(By.xpath("//input[@id='id_gender1']")).click();
         driver.findElement(By.id("customer_lastname")).sendKeys("Wick");
         driver.findElement(By.id("passwd")).sendKeys("password1");
-        driver.findElement(By.id("days")).click();
-        {
-            WebElement dropdown = driver.findElement(By.id("days"));
-            dropdown.findElement(By.xpath("//option[. = 'regexp:5\\s+']")).click();
-        }
-        driver.findElement(By.cssSelector(".account_creation:nth-child(1) > .form-group:nth-child(7)")).click();
-        driver.findElement(By.id("months")).click();
-        {
-            WebElement dropdown = driver.findElement(By.id("months"));
-            dropdown.findElement(By.xpath("//option[. = 'regexp:January\\s']")).click();
-        }
-        driver.findElement(By.id("years")).click();
-        {
-            WebElement dropdown = driver.findElement(By.id("years"));
-            dropdown.findElement(By.xpath("//option[. = 'regexp:1994\\s+']")).click();
-        }
+
+        Select day = new Select(driver.findElement(By.xpath("//*[@id='days']")));
+        day.selectByIndex(5);
+        Select month = new Select(driver.findElement(By.xpath("//*[@id='months']")));
+        month.selectByIndex(5);
+        Select year = new Select(driver.findElement(By.xpath("//*[@id='years']")));
+        year.selectByIndex(5);
         driver.findElement(By.id("newsletter")).click();
         driver.findElement(By.id("optin")).click();
         driver.findElement(By.id("company")).click();
@@ -63,11 +55,8 @@ public class AutomationCreateAccountTest {
         driver.findElement(By.id("address1")).sendKeys("9938 county road 38");
         driver.findElement(By.id("city")).click();
         driver.findElement(By.id("city")).sendKeys("bankston");
-        driver.findElement(By.id("id_state")).click();
-        {
-            WebElement dropdown = driver.findElement(By.id("id_state"));
-            dropdown.findElement(By.xpath("//option[. = 'Florida']")).click();
-        }
+        Select state = new Select(driver.findElement(By.xpath("//*[@id='id_state']")));
+        state.selectByIndex(5);
         driver.findElement(By.id("postcode")).click();
         driver.findElement(By.id("postcode")).sendKeys("39945");
         driver.findElement(By.id("other")).click();
