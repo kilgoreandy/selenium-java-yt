@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class RawTest {
+public class DemoQACreateAccountTest {
 
     @Test
     public void firstTest() {
