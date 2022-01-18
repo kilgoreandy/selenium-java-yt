@@ -1,40 +1,42 @@
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.HashMap;
-import java.util.Map;
+public class AutomationCreateAccountTest {
 
-public class CreateanaccountTest {
-    private WebDriver driver;
-    private Map<String, Object> vars;
-    JavascriptExecutor js;
-    @Before
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
-        //System.setProperty("webdriver.chrome.driver", "BetaDriver/chromedriver.exe");
-
-        WebDriver driver = new ChromeDriver();
-
-        vars = new HashMap<String, Object>();
-    }
-    @After
-    public void tearDown() {
-        driver.quit();
-    }
     @Test
-    public void createanaccount() {
-
+    public void firstTest() {
+        JavascriptExecutor js;
+        System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        js = (JavascriptExecutor) driver;
         driver.get("https://tinyurl.com/5yamxppx");
         driver.manage().window().setSize(new Dimension(1900, 1017));
+        try {
+            driver.findElement(By.linkText("Sign out")).click();
+        }
+        catch (NoSuchElementException ex) {
+            System.out.println(("skipping"));
+        }
         driver.findElement(By.linkText("Sign in")).click();
         driver.findElement(By.id("email_create")).click();
         driver.findElement(By.id("email_create")).sendKeys("88@macr2.com");
         driver.findElement(By.cssSelector("#SubmitCreate > span")).click();
-        driver.findElement(By.id("customer_firstname")).click();
+        try {
+            driver.findElement(By.id("customer_firstname")).click();
+        }
+        catch (NoSuchElementException ex) {
+            driver.findElement(By.id("email_create")).clear();
+            driver.findElement(By.id("email_create")).sendKeys("468455@macr2.com");
+            driver.findElement(By.cssSelector("#SubmitCreate > span")).click();
+            WebDriverWait wait = new WebDriverWait(driver, 3000);
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("customer_firstname")));
+            driver.findElement(By.id("customer_firstname")).click();
+        }
         driver.findElement(By.id("customer_firstname")).sendKeys("Bob");
+        //driver.findElement(By.xpath("//input[@id='id_gender1']")).click();
         driver.findElement(By.id("customer_lastname")).sendKeys("Wick");
         driver.findElement(By.id("passwd")).sendKeys("password1");
         driver.findElement(By.id("days")).click();
@@ -79,4 +81,3 @@ public class CreateanaccountTest {
         driver.findElement(By.cssSelector("#submitAccount > span")).click();
     }
 }
-
