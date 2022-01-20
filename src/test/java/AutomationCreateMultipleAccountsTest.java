@@ -68,9 +68,11 @@ public class AutomationCreateMultipleAccountsTest {
                 driver.findElement(By.id("customer_lastname")).sendKeys(lName);
                 driver.findElement(By.id("passwd")).sendKeys(password);
 
-                Select day = new Select(driver.findElement(By.xpath("//*[@id='days']")));
-                day.selectByVisibleText(birthday);
+                Select days = new Select(driver.findElement(By.id(("days"))));
+                //driver.findElement(By.id("days")).click();
+                days.selectByVisibleText("1");
                 Select month = new Select(driver.findElement(By.xpath("//*[@id='months']")));
+                driver.findElement(By.id("months")).click();
                 month.selectByVisibleText(birthmonth);
                 Select year = new Select(driver.findElement(By.xpath("//*[@id='years']")));
                 year.selectByVisibleText(birthyear);
