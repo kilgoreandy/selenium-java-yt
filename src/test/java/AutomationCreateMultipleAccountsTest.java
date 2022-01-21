@@ -24,7 +24,8 @@ public class AutomationCreateMultipleAccountsTest {
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("http://automationpractice.com/index.php");
+        //driver.get("http://automationpractice.com/index.php");
+        driver.get("https://web.archive.org/web/20210515151630/http://automationpractice.com/index.php");
     }
 
 
@@ -59,6 +60,7 @@ public class AutomationCreateMultipleAccountsTest {
                 String addressalias = csvCell[19];
 
                 driver.findElement(By.linkText("Sign in")).click();
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 driver.findElement(By.id("email_create")).click();
                 driver.findElement(By.id("email_create")).sendKeys(email);
                 driver.findElement(By.cssSelector("#SubmitCreate > span")).click();
