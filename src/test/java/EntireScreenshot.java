@@ -1,9 +1,6 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 
@@ -21,13 +18,13 @@ public class EntireScreenshot {
         driver.get("https://www.airbnb.co.in/s/India/");
 
 //take screenshot of the entire page
-        Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
-        try {
-            ImageIO.write(screenshot.getImage(), "PNG", new File("path of the file"));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+//        Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
+//        try {
+//            ImageIO.write(screenshot.getImage(), "PNG", new File("path of the file"));
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
 
         driver.quit();
 

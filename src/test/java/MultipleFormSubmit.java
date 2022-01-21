@@ -33,7 +33,7 @@ public class MultipleFormSubmit {
     @Test
     public void firstTest() throws IOException, CsvValidationException, Exception {
         csvReader = new CSVReader(new FileReader(CSV_PATH));
-
+    int count = 1;
         while ((csvCell = csvReader.readNext()) != null) {
 
             String fullName = csvCell[0];
@@ -97,13 +97,16 @@ public class MultipleFormSubmit {
             Select place = new Select(driver.findElement(By.className("custom-select")));
             //driver.findElement(By.className("custom-select")).click();
             place.selectByVisibleText(destination);
-
+            String path = ("Snaps/test" + count + ".png");
 
             //Logic for selecting and uploading a file
-            this.takeSnapShot(driver, "resources");
+            this.takeSnapShot(driver, path);
+            ++count;
             driver.navigate().refresh();
         }
+        driver.close();
     }
+
         public static void takeSnapShot(WebDriver webdriver,String fileWithPath) throws Exception {
 
             TakesScreenshot scrShot = ((TakesScreenshot) webdriver);
