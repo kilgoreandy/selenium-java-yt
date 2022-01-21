@@ -1,12 +1,16 @@
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -27,10 +31,10 @@ public class MultipleFormSubmit {
     }
 
     @Test
-    public void firstTest() throws IOException, CsvValidationException {
+    public void firstTest() throws IOException, CsvValidationException, Exception {
         csvReader = new CSVReader(new FileReader(CSV_PATH));
 
-        while ((csvCell = csvReader.readNext()) != null){
+        while ((csvCell = csvReader.readNext()) != null) {
 
             String fullName = csvCell[0];
             String mobile = csvCell[1];
@@ -51,23 +55,8 @@ public class MultipleFormSubmit {
             driver.findElement(By.id("password")).sendKeys(password);
             driver.findElement(By.id("address")).click();
             driver.findElement(By.id("address")).sendKeys(address);
-            System.out.println(gender.getClass().getSimpleName());
-            System.out.println(gender == "M");
-            System.out.println(gender);
-            //Logic for finding Gender
-//            if (gender == "M") {
-//                driver.findElement(By.id("male")).click();
-//                System.out.println("CLicked male");
-//            }
-//            else if (gender == "F") {
-//                driver.findElement(By.id("female")).click();
-//            }
-//            else {
-//                driver.findElement(By.id("other")).click();
-//            }
 
-
-            //Alternative for finding and selecting gender
+            //Logic for finding and selecting gender
             switch (gender) {
                 case "M":
                     driver.findElement(By.id("male")).click();
@@ -111,8 +100,20 @@ public class MultipleFormSubmit {
 
 
             //Logic for selecting and uploading a file
-
+            this.takeSnapShot(driver, "resources");
             driver.navigate().refresh();
         }
     }
-}
+        public static void takeSnapShot(WebDriver webdriver,String fileWithPath) throws Exception {
+
+            TakesScreenshot scrShot = ((TakesScreenshot) webdriver);
+
+            File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
+
+            File DestFile = new File(fileWithPath);
+
+            FileUtils.copyFile(SrcFile, DestFile);
+        }
+
+    }
+
