@@ -9,14 +9,18 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class MultipleFormSubmit {
     String CSV_PATH = "resources/FormInfo.csv";
-    String DRIVER_PATH = "resources/chromedriver.exe";
+    String DRIVER_PATH = "resources/chromedriver";
     WebDriver driver;
     private CSVReader csvReader;
     String[] csvCell;
@@ -100,7 +104,10 @@ public class MultipleFormSubmit {
             String path = ("Snaps/test" + count + ".png");
 
             //Logic for selecting and uploading a file
-            this.takeSnapShot(driver, path);
+            Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
+            ImageIO.write(screenshot.getImage(),"PNG",new File("Snaps/test" + count + ".png"));
+
+//            this.takeSnapShot(driver, path);
             ++count;
             driver.navigate().refresh();
         }
@@ -116,6 +123,8 @@ public class MultipleFormSubmit {
             File DestFile = new File(fileWithPath);
 
             FileUtils.copyFile(SrcFile, DestFile);
+
+
         }
 
     }
