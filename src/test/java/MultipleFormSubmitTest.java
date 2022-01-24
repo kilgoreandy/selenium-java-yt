@@ -1,11 +1,7 @@
 import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
-import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -16,13 +12,11 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 
-public class MultipleFormSubmit {
+public class MultipleFormSubmitTest {
     String CSV_PATH = "resources/FormInfo.csv";
-    String DRIVER_PATH = "resources/chromedriver";
+    String DRIVER_PATH = "resources/chromedriver.exe";
     WebDriver driver;
-    private CSVReader csvReader;
     String[] csvCell;
 
     @Before
@@ -35,8 +29,8 @@ public class MultipleFormSubmit {
     }
 
     @Test
-    public void firstTest() throws IOException, CsvValidationException, Exception {
-        csvReader = new CSVReader(new FileReader(CSV_PATH));
+    public void firstTest() throws Exception {
+        CSVReader csvReader = new CSVReader(new FileReader(CSV_PATH));
     int count = 1;
         while ((csvCell = csvReader.readNext()) != null) {
 
@@ -101,7 +95,6 @@ public class MultipleFormSubmit {
             Select place = new Select(driver.findElement(By.className("custom-select")));
             //driver.findElement(By.className("custom-select")).click();
             place.selectByVisibleText(destination);
-            String path = ("Snaps/test" + count + ".png");
 
             //Logic for selecting and uploading a file
             Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
@@ -114,18 +107,7 @@ public class MultipleFormSubmit {
         driver.close();
     }
 
-        public static void takeSnapShot(WebDriver webdriver,String fileWithPath) throws Exception {
 
-            TakesScreenshot scrShot = ((TakesScreenshot) webdriver);
-
-            File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
-
-            File DestFile = new File(fileWithPath);
-
-            FileUtils.copyFile(SrcFile, DestFile);
-
-
-        }
 
     }
 
