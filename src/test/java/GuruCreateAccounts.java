@@ -10,6 +10,7 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.FileReader;
+import java.util.concurrent.TimeUnit;
 
 public class GuruCreateAccounts {
     String CSV_PATH = "resources/Customer_Info.csv";
@@ -29,17 +30,16 @@ public class GuruCreateAccounts {
         driver.findElement(By.name("password")).click();
         driver.findElement(By.name("password")).sendKeys("umajesU");
         driver.findElement(By.name("btnLogin")).click();
+        driver.findElement(By.linkText("New Customer")).click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
 
         try {
-            driver.findElement(By.linkText("New Customer")).click();
+            driver.switchTo().frame("Advertisement");
+            driver.findElement(By.id("dismiss-button")).click();
+
                     }
         catch(NoSuchElementException  ex){
-            driver.switchTo().frame(4);
-            driver.switchTo().frame(0);
-            driver.findElement(By.cssSelector(".ns-6lwfi-e-8")).click();
-
-//            driver.findElement(By.xpath("//*[@id=\"close\"]")).click();
             System.out.println("Cookie model not present");
             System.out.println("Ad model not present");
             driver.switchTo().frame(0);
@@ -85,10 +85,8 @@ public class GuruCreateAccounts {
                     break;
             }
             driver.findElement(By.id("dob")).click();
-//            driver.findElement(By.id("dob")).sendKeys(dob);
+            driver.findElement(By.id("dob")).sendKeys("01012020");
 
-            JavascriptExecutor js = (JavascriptExecutor)driver;
-            js.executeScript("document.getElementById('dob').value=dob");
 
             driver.findElement(By.name("addr")).click();
             driver.findElement(By.name("addr")).sendKeys(address);
