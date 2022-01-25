@@ -2,16 +2,25 @@ import com.opencsv.CSVReader;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
+import javax.imageio.ImageIO;
+import java.io.File;
 import java.io.FileReader;
+import java.util.concurrent.TimeUnit;
 
 public class GuruCreateAccounts {
     String CSV_PATH = "resources/Customer_Info.csv";
     String csvCell[];
     String DRIVER_PATH = "resources/chromedriver.exe";
     WebDriver driver;
+    int count = 1;
 
     @Before
     public void setup() throws Exception{
@@ -23,6 +32,18 @@ public class GuruCreateAccounts {
         driver.findElement(By.name("password")).click();
         driver.findElement(By.name("password")).sendKeys("umajesU");
         driver.findElement(By.name("btnLogin")).click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        try {
+            driver.switchTo().frame(3);
+            driver.findElement(By.cssSelector("#save > .mat-button-wrapper span")).click();
+        }
+        catch(NoSuchElementException ex){
+            System.out.println("Cookie model not present");
+        }
+
+
+
     }
     @Test
     public void FirstTest() throws Exception{
@@ -40,7 +61,8 @@ public class GuruCreateAccounts {
             String email = csvCell[8];
             String password = csvCell[9];
 
-            driver.findElement(By.cssSelector("body > div:nth-child(6) > div > ul > li:nth-child(2) > a")).click();
+            driver.findElement(By.linkText("New Customer")).click();
+
             driver.findElement(By.name("name")).click();
             driver.findElement(By.name("name")).sendKeys(CustomerName);
 
@@ -49,13 +71,17 @@ public class GuruCreateAccounts {
                 case "F":
                     driver.findElement(By.cssSelector("body > table > tbody > tr > td > table > tbody > " +
                             "tr:nth-child(5)> td:nth-child(2) > input[type=radio]:nth-child(2)")).click();
-                default:
+                    break;
+                case "M":
                     driver.findElement(By.cssSelector("body > table > tbody > tr > td > table > tbody > " +
                             "tr:nth-child(5) > td:nth-child(2) > input[type=radio]:nth-child(1)")).click();
+                    break;
             }
-
             driver.findElement(By.id("dob")).click();
-            driver.findElement(By.id("dob")).sendKeys(dob);
+            driver.findElement(By.id("dob")).sendKeys("0002-01-15");
+            driver.findElement(By.id("dob")).sendKeys("0020-01-15");
+            driver.findElement(By.id("dob")).sendKeys("0202-01-15");
+            driver.findElement(By.id("dob")).sendKeys("2020-01-15");
             driver.findElement(By.name("addr")).click();
             driver.findElement(By.name("addr")).sendKeys(address);
             driver.findElement(By.name("city")).click();
@@ -70,8 +96,11 @@ public class GuruCreateAccounts {
             driver.findElement(By.name("emailid")).sendKeys(email);
             driver.findElement(By.name("password")).click();
             driver.findElement(By.name("password")).sendKeys(password);
+            Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
+            ImageIO.write(screenshot.getImage(),"PNG",new File("Snaps/CustomerAccount" +count + ".png"));
             driver.findElement(By.cssSelector("body > table > tbody > tr > td > table > " +
                     "tbody > tr:nth-child(14) > td:nth-child(2) > input[type=submit]:nth-child(1)")).click();
+            count++;
         }
     }
 }
