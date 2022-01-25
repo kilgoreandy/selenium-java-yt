@@ -1,10 +1,7 @@
 import com.opencsv.CSVReader;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
@@ -13,7 +10,6 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.FileReader;
-import java.util.concurrent.TimeUnit;
 
 public class GuruCreateAccounts {
     String CSV_PATH = "resources/Customer_Info.csv";
@@ -27,19 +23,30 @@ public class GuruCreateAccounts {
         System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
         driver = new ChromeDriver();
         driver.get("https://www.demo.guru99.com/V4");
+        driver.manage().window().maximize();
         driver.findElement(By.name("uid")).click();
         driver.findElement(By.name("uid")).sendKeys("mngr382349");
         driver.findElement(By.name("password")).click();
         driver.findElement(By.name("password")).sendKeys("umajesU");
         driver.findElement(By.name("btnLogin")).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
 
         try {
-            driver.switchTo().frame(3);
-            driver.findElement(By.cssSelector("#save > .mat-button-wrapper span")).click();
-        }
-        catch(NoSuchElementException ex){
+            driver.findElement(By.linkText("New Customer")).click();
+                    }
+        catch(NoSuchElementException  ex){
+            driver.switchTo().frame(4);
+            driver.switchTo().frame(0);
+            driver.findElement(By.cssSelector(".ns-6lwfi-e-8")).click();
+
+//            driver.findElement(By.xpath("//*[@id=\"close\"]")).click();
             System.out.println("Cookie model not present");
+            System.out.println("Ad model not present");
+            driver.switchTo().frame(0);
+        }
+        catch(NoSuchFrameException ex) {
+            System.out.println("Cookie model not present");
+            System.out.println("Ad model not present");
         }
 
 
@@ -78,10 +85,11 @@ public class GuruCreateAccounts {
                     break;
             }
             driver.findElement(By.id("dob")).click();
-            driver.findElement(By.id("dob")).sendKeys("0002-01-15");
-            driver.findElement(By.id("dob")).sendKeys("0020-01-15");
-            driver.findElement(By.id("dob")).sendKeys("0202-01-15");
-            driver.findElement(By.id("dob")).sendKeys("2020-01-15");
+//            driver.findElement(By.id("dob")).sendKeys(dob);
+
+            JavascriptExecutor js = (JavascriptExecutor)driver;
+            js.executeScript("document.getElementById('dob').value=dob");
+
             driver.findElement(By.name("addr")).click();
             driver.findElement(By.name("addr")).sendKeys(address);
             driver.findElement(By.name("city")).click();
