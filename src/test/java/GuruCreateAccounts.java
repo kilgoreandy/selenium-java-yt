@@ -15,12 +15,12 @@ import java.util.concurrent.TimeUnit;
 public class GuruCreateAccounts {
     String CSV_PATH = "resources/Customer_Info.csv";
     String csvCell[];
-    String DRIVER_PATH = "resources/chromedriver.exe";
+    String DRIVER_PATH = "resources/chromedriver";
     WebDriver driver;
     int count = 1;
 
     @Before
-    public void setup() throws Exception{
+    public void setup() {
         System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
         driver = new ChromeDriver();
         driver.get("https://www.demo.guru99.com/V4");
@@ -30,6 +30,14 @@ public class GuruCreateAccounts {
         driver.findElement(By.name("password")).click();
         driver.findElement(By.name("password")).sendKeys("umajesU");
         driver.findElement(By.name("btnLogin")).click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        try{
+            driver.switchTo().frame("gdpr-consent-notice");
+            driver.findElement(By.id("save")).click();
+        }
+        catch(NoSuchFrameException ex){
+            System.out.println("Frame not detected");
+        }
         driver.findElement(By.linkText("New Customer")).click();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
@@ -58,7 +66,7 @@ public class GuruCreateAccounts {
 
         while ((csvCell = csvReader.readNext()) != null){
             String CustomerName = csvCell[0];
-            String gender = csvCell[1];;
+            String gender = csvCell[1];
             String dob = csvCell[2];
             String address = csvCell[3];
             String city = csvCell[4];
@@ -84,8 +92,10 @@ public class GuruCreateAccounts {
                             "tr:nth-child(5) > td:nth-child(2) > input[type=radio]:nth-child(1)")).click();
                     break;
             }
-            driver.findElement(By.id("dob")).click();
-            driver.findElement(By.id("dob")).sendKeys("01012020");
+
+            WebElement dateBox = driver.findElement(By.xpath("//*[@id='dob']"));
+            dateBox.sendKeys(dob);
+
 
 
             driver.findElement(By.name("addr")).click();
@@ -105,8 +115,15 @@ public class GuruCreateAccounts {
             Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
             ImageIO.write(screenshot.getImage(),"PNG",new File("Snaps/CustomerAccount" +count + ".png"));
             driver.findElement(By.cssSelector("body > table > tbody > tr > td > table > " +
-                    "tbody > tr:nth-child(14) > td:nth-child(2) > input[type=submit]:nth-child(1)")).click();
+                        "tbody > tr:nth-child(14) > td:nth-child(2) > input[type=submit]:nth-child(1)")).click();
+            try {
+                driver.switchTo().alert().accept();
+            }
+            catch (org.openqa.selenium.NoAlertPresentException ex){
+                System.out.println("Email already exists moving on");
+            }
             count++;
         }
+        driver.close();
     }
 }
