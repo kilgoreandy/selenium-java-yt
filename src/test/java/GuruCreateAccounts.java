@@ -10,12 +10,13 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.FileReader;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class GuruCreateAccounts {
     String CSV_PATH = "resources/Customer_Info.csv";
     String csvCell[];
-    String DRIVER_PATH = "resources/chromedriver";
+    String DRIVER_PATH = "resources/chromedriver.exe";
     WebDriver driver;
     int count = 1;
 
@@ -31,33 +32,20 @@ public class GuruCreateAccounts {
         driver.findElement(By.name("password")).sendKeys("umajesU");
         driver.findElement(By.name("btnLogin")).click();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+        List<WebElement> framesList = driver.findElements(By.xpath("//iframe"));
+        int numOfFrames = framesList.size();
+        System.out.println(numOfFrames);
+
         try{
             driver.switchTo().frame("gdpr-consent-notice");
             driver.findElement(By.id("save")).click();
         }
         catch(NoSuchFrameException ex){
-            System.out.println("Frame not detected");
+            System.out.println("Cookie Frame not detected");
         }
         driver.findElement(By.linkText("New Customer")).click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-
-
-        try {
-            driver.switchTo().frame("Advertisement");
-            driver.findElement(By.id("dismiss-button")).click();
-
-                    }
-        catch(NoSuchElementException  ex){
-            System.out.println("Cookie model not present");
-            System.out.println("Ad model not present");
-            driver.switchTo().frame(0);
-        }
-        catch(NoSuchFrameException ex) {
-            System.out.println("Cookie model not present");
-            System.out.println("Ad model not present");
-        }
-
-
+        driver.get("https://www.demo.guru99.com/V4/manager/addcustomerpage.php");
 
     }
     @Test
@@ -96,8 +84,6 @@ public class GuruCreateAccounts {
             WebElement dateBox = driver.findElement(By.xpath("//*[@id='dob']"));
             dateBox.sendKeys(dob);
 
-
-
             driver.findElement(By.name("addr")).click();
             driver.findElement(By.name("addr")).sendKeys(address);
             driver.findElement(By.name("city")).click();
@@ -117,13 +103,43 @@ public class GuruCreateAccounts {
             driver.findElement(By.cssSelector("body > table > tbody > tr > td > table > " +
                         "tbody > tr:nth-child(14) > td:nth-child(2) > input[type=submit]:nth-child(1)")).click();
             try {
+                System.out.println("Alert text is: " +driver.switchTo().alert().getText());
                 driver.switchTo().alert().accept();
             }
             catch (org.openqa.selenium.NoAlertPresentException ex){
-                System.out.println("Email already exists moving on");
+                System.out.println("Created User");
+                Screenshot capture=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
+                ImageIO.write(capture.getImage(),"PNG",new File("Snaps/CustomerAccountCreated" +count + ".png"));
             }
+
             count++;
         }
         driver.close();
     }
 }
+
+//        try {
+//            driver.switchTo().frame("Advertisement");
+//            driver.findElement(By.id("dismiss-button")).click();
+//                    }
+//        catch(NoSuchElementException  ex){
+//            System.out.println("Could not find element");
+//       }
+//        catch(NoSuchFrameException ex) {
+//            System.out.println("Ad model not present");
+//        }
+//            driver.switchTo().defaultContent();
+//        try {
+//            driver.switchTo().frame("google_ads_iframe_/24132379/INTERSTITIAL_DemoGuru99_0");
+//            System.out.println("Did find ");
+//            driver.findElement(By.id("dismiss-button")).click();
+//
+//        }
+//        catch(NoSuchFrameException tx) {
+//            System.out.println("Ad model not present");
+//        }
+//        catch(NoSuchElementException pa) {
+//            System.out.println("Error dismissing ad could not find dismiss button please take over for me.");
+//
+//            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//        }
