@@ -97,6 +97,11 @@ public class MultipleFormSubmitTest {
             place.selectByVisibleText(destination);
 
             //Logic for selecting and uploading a file
+            driver.findElement(By.cssSelector("#inputGroupFile02")).sendKeys("C:\\Users\\DeriskQA  5\\IdeaProjects\\selenium-java-yt\\resources\\AccountInfo.csv");
+
+
+
+
             Screenshot screenshot=new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
             ImageIO.write(screenshot.getImage(),"PNG",new File("Snaps/test" + count + ".png"));
 
