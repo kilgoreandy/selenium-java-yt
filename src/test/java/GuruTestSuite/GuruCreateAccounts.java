@@ -1,3 +1,5 @@
+package GuruTestSuite;
+
 import com.opencsv.CSVReader;
 import org.junit.Before;
 import org.junit.Test;
