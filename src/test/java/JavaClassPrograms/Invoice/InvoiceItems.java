@@ -44,6 +44,8 @@ public class InvoiceItems {
         }
         System.out.println("Your total invoice amount is: " + Math.round(totalAmount*100.0)/100.0);
         System.out.println("Thank you for shopping at Andy's Hardware Store. Come see us again!");
+        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println("Page 1/1");
     }
      //Prints the rest of the invoice for each item
     void printItemsInCart(){
@@ -53,5 +55,8 @@ public class InvoiceItems {
         System.out.println("Price Per Item: $" + price);
     }
 }
+
+
+
 
 

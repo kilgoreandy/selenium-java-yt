@@ -1,10 +1,13 @@
 package GuruTestSuite;
 
 import com.opencsv.CSVReader;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchFrameException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
@@ -22,7 +25,7 @@ public class GuruCreateAccounts {
     WebDriver driver;
     int count = 1;
 
-    @Before
+    @BeforeTest
     public void setup() {
         System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
         driver = new ChromeDriver();
@@ -120,6 +123,11 @@ public class GuruCreateAccounts {
     }
 }
 
+
+
+
+
+//Code for interacting with ads if it is ever needed again.
 //        try {
 //            driver.switchTo().frame("Advertisement");
 //            driver.findElement(By.id("dismiss-button")).click();
