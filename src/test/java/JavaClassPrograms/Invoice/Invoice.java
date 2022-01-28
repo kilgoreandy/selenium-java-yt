@@ -1,9 +1,7 @@
 package JavaClassPrograms.Invoice;
-/*
- * @author Andy
- * @version 1
- * @
- */
+//@author Andy
+//@version 1
+
 public class Invoice {
     String partNumber;
     String partDescription;
@@ -33,7 +31,7 @@ public class Invoice {
         }
         System.out.println("--------------------------------------------------------------------------------");
         System.out.println("Andy's Hardware Store Invoice");
-        System.out.println("Contact me @ 264-456-1249 for any issues");
+        System.out.println("Contact me at 264-456-1249 for any issues");
         System.out.println("--------------------------------------------------------------------------------");
         System.out.println("Buyer Name : Tod Barley 2051154864");
         System.out.println("Shipping Address: 6648 County Road 392, Dayton OH, 45227, US");

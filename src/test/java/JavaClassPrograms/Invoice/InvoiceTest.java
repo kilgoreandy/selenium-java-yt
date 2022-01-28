@@ -1,7 +1,11 @@
 package JavaClassPrograms.Invoice;
 
+// @author Andy
+// @version 1
+// @
 public class InvoiceTest {
 
+    // Test that creates new invoice method four times to test different scenarios
    public static void main(String[] args){
        Invoice iv = new Invoice("844584", "Spoonbill_screwdriver",5, 5.50);
        iv.printInvoice();
