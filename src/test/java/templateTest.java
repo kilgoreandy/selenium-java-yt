@@ -10,7 +10,6 @@
 //import javax.imageio.ImageIO;
 //import java.io.FileReader;
 //
-//public class templateTest {
 //    //Setup variable references
 //
 //    String CSV_PATH = "resources/FormInfo.csv";
@@ -62,5 +61,23 @@
 //// The @After code block is usually summoned as a tear down test. This is usually where you would clean your database
 //  if needed,  and close the browser driver.
 //// @After
+
+
+
+// If you would like to convert to a PDF here is the code to do that
+//Document document = new Document();
+//        //Create OutputStream instance.
+//        OutputStream outputStream =
+//        new FileOutputStream(new File("resources/TestFile.pdf"));
+//        //Create PDFWriter instance.
+//        PdfWriter.getInstance(document, outputStream);
+//        //Open the document.
+//        document.open();
+//        //Add content to the document.
+//        document.add(new Paragraph("Hello world, " +
+//        "this is a test pdf file."));
+//        //Close document and outputStream.
+//        document.close();
+//        outputStream.close();
 //
 //}
