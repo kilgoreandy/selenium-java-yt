@@ -1,10 +1,7 @@
 package JavaClassPrograms.Formulas;
-
 import java.text.DecimalFormat;
 import java.util.Scanner;
-
 /**
-
  * @author Andy Kilgore
  *
  */
@@ -18,7 +15,6 @@ public class ColaVendingMachine {
     double change;
 //Constructor
     public ColaVendingMachine() {}
-
     //Accessor for Name
 	public String getName() {
 		Scanner s = new Scanner(System.in);
@@ -26,7 +22,6 @@ public class ColaVendingMachine {
 		name = s.next();
 		return name;
 	}
-
     //Asks User name, sells bottle and decreases from currentStock. If current Stock is 0, calls to restock.
 	public void sellBottle(){
         Scanner scan = new Scanner(System.in);
@@ -57,7 +52,6 @@ public class ColaVendingMachine {
         currentStock = capacity;
         System.out.println("Restocked!");
 	}
-
     public void dispenseChange(){
         DecimalFormat df = new DecimalFormat("##.##");
         change = answer-price;
