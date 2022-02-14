@@ -1,12 +1,10 @@
 package JavaClassPrograms;
-
-
 //@author Andy Kilgore
 //@version 1.0
 // Dog program
-
 public class dog {
-    public dog(int size) {
+    int size;
+    void bark() {
         switch (size){
             case 0:
                 System.out.println("Not valid dog size");
