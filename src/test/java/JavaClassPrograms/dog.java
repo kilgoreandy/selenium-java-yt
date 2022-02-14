@@ -2,6 +2,8 @@ package JavaClassPrograms;
 //@author Andy Kilgore
 //@version 1.0
 // Dog program
+
+//Created dog class with method bark. Dog test calls each case and tests each scenario.
 public class dog {
     int size;
     void bark() {

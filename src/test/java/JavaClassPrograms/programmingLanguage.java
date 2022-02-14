@@ -1,11 +1,13 @@
 package JavaClassPrograms;
-
 import org.junit.Test;
-
 import java.util.Locale;
-
+/*
+*@author Andy Kilgore
+* @Version 1.0
+ */
 public class programmingLanguage {
-
+//Created prograamingLangauge, asks user for choice, converts to lowercase and reads comments. If no case is selected
+// it goes with "not sure"
     public  programmingLanguage(String language) {
         language = language.toLowerCase();
         switch (language) {
@@ -35,5 +37,4 @@ public class programmingLanguage {
                 break;
         }
         }
-
     }
