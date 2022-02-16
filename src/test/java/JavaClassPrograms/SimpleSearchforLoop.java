@@ -8,12 +8,10 @@ package JavaClassPrograms;
 // found and lists the index
 public class SimpleSearchforLoop {
     public static void main(String[] args) {
-        String sentence = "This class is awesome";
-        char current = '$';
         int count;
-
-        for (count = 0; current != 'a'; count++){
-            current = sentence.charAt(count);
+        String sentence = "This class is awesome";
+        for (count = 0; sentence.charAt(count) != 'a'; count++){
+            System.out.println(count);
         }
         System.out.println("The character a is first spotted at index: " + count);
     }

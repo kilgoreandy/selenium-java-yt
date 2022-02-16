@@ -12,8 +12,7 @@ public class SimpleSearch {
         char current = '$';
         int count = 0;
 
-        while (current != 'a'){
-            current = sentence.charAt(count);
+        while (sentence.charAt(count) != 'a'){
             count++;
         }
         System.out.println("The character a is first spotted at index: " + count);
