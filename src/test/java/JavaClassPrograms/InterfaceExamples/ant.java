@@ -1,4 +1,4 @@
-package JavaClassPrograms.Interface;
+package JavaClassPrograms.InterfaceExamples;
 
 public class ant implements NonV{
     @Override

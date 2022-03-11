@@ -1,4 +1,4 @@
-package JavaClassPrograms.Interface;
+package JavaClassPrograms.InterfaceExamples;
 
 public class dalton implements Work{
 

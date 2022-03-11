@@ -1,4 +1,4 @@
-package JavaClassPrograms.Interface;
+package JavaClassPrograms.InterfaceExamples;
 
 public interface NonV {
     void nonvenomous();
