@@ -1,8 +1,13 @@
 package JavaClassPrograms.InterfaceV2;
+/*
+ *@Version 1.0
+ * @Author Andy Kilgore
+ */
 
+//CLass that interprets lettergrade and coverts to number grade.
 public class LetterGrade implements Grade {
 String lgrade;
-
+//Return grade based on input
     @Override
     public int toPercent(String lgrade) {
         switch (lgrade) {
@@ -38,6 +43,6 @@ String lgrade;
 
     @Override
     public boolean includeinAverage(String lgrade) {
-        return false;
+        return true;
     }
 }

@@ -1,5 +1,10 @@
 package JavaClassPrograms.InterfaceV2;
+/*
+ *@Version 1.0
+ * @Author Andy Kilgore
+ */
 
+//Class that converts string into an int and returns
 public class PercentageGrade implements Grade {
 
     @Override

@@ -1,19 +1,16 @@
 package JavaClassPrograms;
-
 import java.util.Random;
-
 /*
 *@author Andy Kilgore
 * @Version 1.0
  */
+//Generates 10 random numbers, and tells user if 7 was found in the array or not.
 public class randomNumberSearch {
     public static void main(String[] args) {
         int[] random_numbers = new int[9];
         int count;
         boolean found = false;
         Random r = new Random();
-
-
         for (count = 0; count < 9; count++){
             int number = r.nextInt(10)+1;
             random_numbers[count] = number;

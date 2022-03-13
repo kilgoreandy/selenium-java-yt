@@ -7,7 +7,7 @@ package JavaClassPrograms;
 import java.util.Scanner;
 public class Factorial {
     public static void main(String[] args) {
-        System.out.println("Enter number you want to recurse");
+        System.out.println("Enter number");
         Scanner s = new Scanner(System.in);
         int number = s.nextInt();
         System.out.println(factor(number));
