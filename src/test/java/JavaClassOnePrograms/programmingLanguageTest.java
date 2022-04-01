@@ -1,4 +1,4 @@
-package JavaClassPrograms;
+package JavaClassOnePrograms;
 
 import static org.testng.Assert.*;
 

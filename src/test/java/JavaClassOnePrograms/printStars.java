@@ -1,4 +1,4 @@
-package JavaClassPrograms;
+package JavaClassOnePrograms;
 public class printStars{
     public static void main(String[] args) {
         System.out.println("* * * * * * * *");

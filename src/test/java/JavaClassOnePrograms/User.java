@@ -1,25 +1,25 @@
-package JavaClassPrograms;
+package JavaClassOnePrograms;
 /*
- *@Author Andy Kilgore
- * @Version 1.0
+*@Author Andy Kilgore
+* @Version 1.0
  */
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
-//Creates a User class, adds three Users to a hashmap and prompts user for login. If incorrect, throws custom Exception.
-public class User_Exceptions {
+//Creates a User class, adds three Users to a hashmap and prompts user for login.
+public class User {
     String username;
     String password;
     String role;
-    public User_Exceptions(String username, String password, String role) {
+    public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
     }
-    public static void main(String[] args) throws AccessDenied {
-        User_Exceptions a = new User_Exceptions("bsegar", "bsegar", "user");
-        User_Exceptions b = new User_Exceptions("jhendrix", "jhendrix", "user");
-        User_Exceptions c = new User_Exceptions("lmcquire", "lmcquire", "superuser");
+    public static void main(String[] args) {
+        User a = new User("bsegar", "bsegar", "user");
+        User b = new User("jhendrix", "jhendrix", "user");
+        User c = new User("lmcquire", "lmcquire", "superuser");
         HashMap<String, String> db = new HashMap<>();
         db.put(a.username, a.password);
         db.put(b.username, b.password);
@@ -42,7 +42,8 @@ public class User_Exceptions {
         String temp = db.get(login);
         while (!loggged_in){
             if (!Objects.equals(pswd,temp)){
-                throw new AccessDenied("Wrong password. Try again");
+                System.out.println("Access Denied Bad Password. Try Again");
+                pswd = s.next();
             }
             else if (Objects.equals(pswd,temp)){
                 System.out.println("You are logged in " + login );

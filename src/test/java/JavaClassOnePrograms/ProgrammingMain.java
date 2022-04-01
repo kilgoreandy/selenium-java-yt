@@ -1,4 +1,4 @@
-package JavaClassPrograms;
+package JavaClassOnePrograms;
 import java.util.Scanner;
 /*
  *@author Andy Kilgore

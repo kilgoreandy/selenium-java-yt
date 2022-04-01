@@ -1,4 +1,4 @@
-package JavaClassPrograms;
+package JavaClassOnePrograms;
 import org.apache.logging.log4j.core.util.JsonUtils;
 import java.util.ArrayList;
 import java.util.Scanner;

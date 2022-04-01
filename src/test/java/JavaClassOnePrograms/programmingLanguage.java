@@ -1,4 +1,4 @@
-package JavaClassPrograms;
+package JavaClassOnePrograms;
 import org.junit.Test;
 import java.util.Locale;
 /*

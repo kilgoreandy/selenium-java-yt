@@ -1,4 +1,4 @@
-package JavaClassPrograms;
+package JavaClassOnePrograms;
 import static org.testng.Assert.*;
 public class dogTest {
     public static void main(String[] args) {

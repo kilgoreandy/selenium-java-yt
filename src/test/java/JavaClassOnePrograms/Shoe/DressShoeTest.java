@@ -3,11 +3,8 @@ package JavaClassPrograms.Shoe;
 *@Version 1.0
 *@Author Andy Kilgore
  */
-import JavaClassPrograms.User;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 import java.util.Scanner;
 import static junit.framework.TestCase.assertTrue;
 //A few junit tests that verify only valid sizes are allowed and fails other inputs.

@@ -1,4 +1,4 @@
-package JavaClassPrograms;
+package JavaClassOnePrograms;
 //@author Andy Kilgore
 //@version 1.0
 // Dog program

@@ -1,4 +1,4 @@
-package JavaClassPrograms;
+package JavaClassOnePrograms;
 /*
  *@Author Andy Kilgore
  * @Version 1.0

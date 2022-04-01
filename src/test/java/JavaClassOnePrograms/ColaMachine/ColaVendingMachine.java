@@ -1,4 +1,4 @@
-package JavaClassPrograms.ColaMachine;
+package JavaClassOnePrograms.ColaMachine;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 /**

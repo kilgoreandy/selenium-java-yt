@@ -1,4 +1,4 @@
-package JavaClassPrograms;
+package JavaClassOnePrograms;
 
 public class gradeExampleDONOTUSE {
 }
